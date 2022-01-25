@@ -1,1 +1,1 @@
-# studenckie-karty
+# studenckie-karty-backend
