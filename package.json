@@ -1,0 +1,45 @@
+{
+  "name": "studenckie-karty",
+  "version": "1.0.0",
+  "description": "projekt-kck",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "_moduleAliases": {
+    "@config": "config/",
+    "@controllers": "src/controllers/",
+    "@db": "src/db",
+    "@enums": "src/enums/",
+    "@exceptions": "src/exceptions/",
+    "@helpers": "src/helpers/",
+    "@middleware": "src/middleware/",
+    "@models": "src/models/",
+    "@routes": "src/routes/",
+    "@services": "src/services/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShanghaiG/studenckie-karty.git"
+  },
+  "author": "Zespol-KCK-grupa-Olubek-Dudzinski-Kopeć-Zganiacz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShanghaiG/studenckie-karty/issues"
+  },
+  "homepage": "https://github.com/ShanghaiG/studenckie-karty#readme",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "config": "^3.3.7",
+    "dotenv": "^14.3.0",
+    "express": "^4.17.2",
+    "express-validator": "^6.14.0",
+    "expressjs": "^1.0.1",
+    "helmet": "^5.0.2",
+    "module-alias": "^2.2.2",
+    "node": "^17.4.0",
+    "path": "^0.12.7",
+    "pino": "^7.6.4",
+    "pino-http": "^6.6.0"
+  }
+}
