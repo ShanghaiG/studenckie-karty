@@ -6,7 +6,7 @@ const CardModel = {
   },
 
   findAllAnswersCards: (trx = knex) => {
-    return trx("answers_cards").select();
+    return trx.knex("answers_cards").select();
   },
 };
 
