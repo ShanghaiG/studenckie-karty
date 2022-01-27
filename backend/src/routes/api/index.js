@@ -3,5 +3,5 @@
 const PREFIX = "/api";
 
 module.exports = (app) => {
-  app.use(PREFIX, require("./test.route"));
+  app.use(PREFIX, require("./cards.route"));
 };
