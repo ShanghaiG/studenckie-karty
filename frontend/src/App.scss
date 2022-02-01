@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  background: radial-gradient(ellipse at center, #865b0f 0%, #372903 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  font-size: 100vw;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.layout {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  font-size: 0.005208em;
+}
+
+
+.playerCards {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  height: 30em;
+  width: 20.6em;
+  margin: 4em;
+  overflow: hidden;
+  font-size: 1em;
+  background: #F2B211;
+  border: 1px solid #000000;
+  box-shadow: 0 2.53538px 2.53538px rgba(0, 0, 0, 0.4);
+  border-radius: 0.5em;
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #231A02;
+
+  &[data-size="large"]{
+    height: 47.6em;
+    width: 32.6em;
+    border-radius: 1em;
+    .card__header {
+      font-size: 1.5em;
+    }
+    .card__footer {
+      font-size: 1.5em;
+    }
+    .card__content {
+      font-size: 3em;
+    }
+  }
+
+  &--answer {
+    background: #231A02;
+    color: #F2B211;
+    cursor: pointer;
+    &[data-selected="true"]{
+      background: #9DC73D;
+      color:#1400FF;
+    }
+  }
+}
+
+
+
+.card__header {
+  text-align: right;
+  font-size: 1.2em;
+  flex: 1;
+  width: 100%;
+  opacity: 0.5;
+}
+
+.card__footer {
+  text-align: right;
+  color: #FFF;
+  font-size: 1.2em;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.card__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  text-align: center;
+}
