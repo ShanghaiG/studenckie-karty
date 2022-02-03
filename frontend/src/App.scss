@@ -93,4 +93,36 @@ body {
   justify-content: center;
   font-size: 2em;
   text-align: center;
+  width: 100%;
+}
+
+.fullscreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 96px;
+  line-height: 112px;
+  color: #F2B211;
+}
+
+.startForm {
+  display: flex;
+  justify-content: center;
+  input {
+    height: 1.4em;
+    width: 6em;
+    font-size: 9em;
+  }
+  button {
+    height: 1.4em;
+    width: 1.4em;
+    font-size: 9em;
+  }
 }

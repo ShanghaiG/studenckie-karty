@@ -1,47 +1,29 @@
 import React from "react";
-import Card from "../Card/Card";
-import useFetch from "react-fetch-hook";
+import {useDispatch, useSelector} from "react-redux";
+import GameStageStart from "../Stages/GameStageStart";
+import GameStageWaiting from "../Stages/GameStageWaiting";
 
-const AnswerCards = () => {
-  const { data } = useFetch("http://localhost:8001/api/cards/answers");
-
-  return data;
-};
-
-const MainCards = () => {
-  const { data } = useFetch("http://localhost:8001/api/cards/main");
-
-  return data;
-};
 
 /**
  * PlayerCards component
  */
 const PlayerCards = () => {
-  const mainCardsData = MainCards();
-  const answerCardsData = AnswerCards();
+  const stage = useSelector((state) => state.game.stage);
+  const answerCards = useSelector((state) => state.game.answerCards);
+  const dispatch = useDispatch();
 
-  return (
-    <div className={"playerCards"}>
-      {/* {mainCardsData?.map((element) => {
-        return <Card data={element} />;
-      })} */}
-      {answerCardsData?.map((element) => {
-        return <Card data={element} />;
-      })}
-      {/* <Card props={data} /> */}
-      {/* <Card
-        type={"ANSWER"}
-        selected={true}
-        onSelect={() => {
-          alert("hej");
-        }}
-      />
-      <Card size={"large"} />
-      <Card type={"MAIN"} />
-      <Card /> */}
-    </div>
-  );
+
+  if (stage === "START") {
+    return <GameStageStart/>
+  }
+  if (stage === "WAITING") {
+    return <GameStageWaiting/>
+  }
+
+  return null;
+  // {answerCards?.map((element) => {
+  //   return <Card data={element} />;
+  // })}
 };
 
 export default PlayerCards;
