@@ -1,9 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   margin: 0;
-  background: radial-gradient(ellipse at center, #865b0f 0%, #372903 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background: radial-gradient(
+    ellipse at center,
+    #865b0f 0%,
+    #372903 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   font-size: 100vw;
 
   * {
@@ -18,7 +22,6 @@ body {
   font-size: 0.005208em;
 }
 
-
 .playerCards {
   display: flex;
   justify-content: center;
@@ -30,7 +33,7 @@ body {
   margin: 4em;
   overflow: hidden;
   font-size: 1em;
-  background: #F2B211;
+  background: #f2b211;
   border: 1px solid #000000;
   box-shadow: 0 2.53538px 2.53538px rgba(0, 0, 0, 0.4);
   border-radius: 0.5em;
@@ -38,9 +41,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: #231A02;
+  color: #231a02;
 
-  &[data-size="large"]{
+  &[data-size="large"] {
     height: 47.6em;
     width: 32.6em;
     border-radius: 1em;
@@ -56,17 +59,15 @@ body {
   }
 
   &--answer {
-    background: #231A02;
-    color: #F2B211;
+    background: #231a02;
+    color: #f2b211;
     cursor: pointer;
-    &[data-selected="true"]{
-      background: #9DC73D;
-      color:#1400FF;
+    &[data-selected="true"] {
+      background: #9dc73d;
+      color: #1400ff;
     }
   }
 }
-
-
 
 .card__header {
   text-align: right;
@@ -78,7 +79,7 @@ body {
 
 .card__footer {
   text-align: right;
-  color: #FFF;
+  color: #fff;
   font-size: 1.2em;
   flex: 1;
   display: flex;
@@ -105,11 +106,22 @@ body {
   text-align: center;
 }
 
+@keyframes test {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100;
+  }
+}
+
 h1 {
   font-weight: bold;
   font-size: 96px;
   line-height: 112px;
-  color: #F2B211;
+  color: #f2b211;
+  animation-name: test;
+  animation-duration: 5s;
 }
 
 .startForm {

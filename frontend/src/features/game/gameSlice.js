@@ -47,12 +47,16 @@ export const fetchAvailableUser = createAsyncThunk(
   }
 );
 
+export const preloadAvailableUser = () => async (dispatch) => {
+  const user = await dispatch(fetchAvailableUser());
+  console.log("user w startGame", user.payload);
+  dispatch(addPlayer(user.payload));
+};
+
 export const startGame = (code) => async (dispatch) => {
   await dispatch(fetchAnswersCard());
   await dispatch(fetchMainCard());
-  await dispatch(fetchAvailableUser());
 
-  dispatch(addPlayer({ id: 1, firstName: "Axl", lastName: "Cruz" }));
   dispatch(setStage("WAITING"));
 };
 
@@ -67,7 +71,7 @@ export const gameSlice = createSlice({
       state.code = action.payload;
     },
     addPlayer: (state, action) => {
-      state.players += state.players.concat(action.payload);
+      state.player += action.payload;
     },
   },
   extraReducers(builder) {

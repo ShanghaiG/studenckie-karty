@@ -3,17 +3,8 @@ import useGameStageStart from "./GameStageStart.hook";
 import Fullscreen from "../../Layouts/Fullscreen";
 import { setCode } from "../../../features/game/gameSlice";
 
-const GameStageStart = ({ socket }) => {
-  const { checkForm, code, dispatch, player } = useGameStageStart();
-
-  const [room, setRoom] = useState("");
-
-  const joinRoom = () => {
-    console.log("co w socket, co w room", { code, room });
-    if (code && room) {
-      socket.emit("joinRoom", { room });
-    }
-  };
+const GameStageStart = () => {
+  const { checkForm, code, dispatch, dispatchUser } = useGameStageStart();
 
   return (
     <Fullscreen>
@@ -21,11 +12,9 @@ const GameStageStart = ({ socket }) => {
       <form
         className={"startForm"}
         onSubmit={(e) => {
-          console.log("co w e", e);
-          console.log("co w code", code);
+          dispatchUser();
           e.preventDefault();
           checkForm();
-          joinRoom();
         }}
       >
         <input
@@ -33,10 +22,9 @@ const GameStageStart = ({ socket }) => {
           value={code}
           onChange={(e) => {
             dispatch(setCode(e.target.value));
-            setRoom(e.target.value);
           }}
         />
-        <button type={"submit"}>></button>
+        <button type={"submit"}>&gt;</button>
       </form>
     </Fullscreen>
   );
