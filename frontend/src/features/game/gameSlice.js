@@ -52,7 +52,7 @@ export const startGame = (code) => async (dispatch) => {
   await dispatch(fetchMainCard());
   await dispatch(fetchAvailableUser());
 
-  dispatch(addPlayer({ id: 1, firstName: "Axl", lastName: "Cruz" }));
+  dispatch(addPlayer({ id: 1, firstName: "Axl", lastName: "Cruz", answer:true, admin:true, points:67, avatar:"https://eu.ui-avatars.com/api/?name=Axl+Cruz" }));
   dispatch(setStage("WAITING"));
 };
 
