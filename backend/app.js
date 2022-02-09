@@ -17,11 +17,7 @@ const errorHandler = require("@middleware/error-handler.middleware");
 const requestLogger = require("@middleware/request-logger.middleware");
 const appendRoutes = require("@routes");
 
-const { Server } = require("socket.io");
-const UserModel = require("@models/user.model");
-
-// const sockets = require("@listeners/socket.listener");
-// require("reflect-metadata");
+const sockets = require("@listeners/socket.listener");
 
 const port = config.get("server.port");
 
@@ -29,27 +25,30 @@ const app = express();
 app.use(cors());
 
 const httpServer = http.createServer(app);
+sockets(httpServer);
 
-const io = new Server(httpServer, {
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST", "PUT"],
-  },
-});
+// const io = new Server(httpServer, {
+//   cors: {
+//     origin: "http://localhost:3000",
+//     methods: ["GET", "POST", "PUT"],
+//   },
+// });
 
-io.on("connection", (socket) => {
-  console.log("User connected: ", socket.id);
+// io.on("connection", (socket) => {
+//   console.log("User connected: ", socket.id);
 
-  socket.on("joinRoom", async (data) => {
-    console.log("co w data", data);
-    socket.join(data);
-    //await UserModel.updateActive(userId);
-  });
+//   socket.on("joinRoom", async (data) => {
+//     socket.join(data);
 
-  socket.on("disconnect", () => {
-    console.log("User disconnected", socket.id);
-  });
-});
+//     if (data?.id) {
+//       await UserModel.updateActive(data.id);
+//     }
+//   });
+
+//   socket.on("disconnect", () => {
+//     console.log("User disconnected", socket.id);
+//   });
+// });
 
 app.use(helmet());
 app.use(helmet.referrerPolicy({ policy: "same-origin" }));
