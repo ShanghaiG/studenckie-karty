@@ -4,11 +4,12 @@ const initialState = {
   stage: "START",
   answerCards: [],
   answerCardsLoading: false,
+  mainCard: null,
   mainCards: [],
   mainCardsLoading: false,
   player: null,
-  playerLoading: false,
   players: [],
+  playerLoading: false,
   selectedCardId: null,
   round: 0,
   code: "",
@@ -60,6 +61,23 @@ export const startGame = (code) => async (dispatch) => {
   dispatch(setStage("WAITING"));
 };
 
+export const roundOne = () => async (dispatch) => {
+  dispatch(setStage("ROUND_ONE"));
+};
+
+export const leaderChooseCard = () => async (dispatch) => {
+  dispatch(setRound(1));
+  dispatch(setStage("LEADER_CHOOSE_CARD"));
+};
+
+export const leaderChooseWinner = () => async (dispatch) => {
+  dispatch(setStage("LEADER_CHOOSE_WINNER"));
+};
+
+export const roundEnd = () => async (dispatch) => {
+  dispatch(setStage("ROUND_END"));
+};
+
 export const gameSlice = createSlice({
   name: "game",
   initialState,
@@ -71,7 +89,10 @@ export const gameSlice = createSlice({
       state.code = action.payload;
     },
     addPlayer: (state, action) => {
-      state.player += action.payload;
+      state.player = action.payload;
+    },
+    setRound: (state, action) => {
+      state.round = action.payload;
     },
   },
   extraReducers(builder) {
@@ -101,6 +122,6 @@ export const gameSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setStage, addPlayer, setCode } = gameSlice.actions;
+export const { setStage, addPlayer, setCode, setRound } = gameSlice.actions;
 
 export default gameSlice.reducer;

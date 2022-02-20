@@ -20,6 +20,15 @@ const UserModel = {
       .where({ is_active: true });
   },
 
+  update: (userId, data, trx = knex) => {
+    return trx
+      .knex("users")
+      .update(data)
+      .where({ id: userId })
+      .returning("*")
+      .getFirst();
+  },
+
   updatePoints: (userId, points, trx = knex) => {
     return trx
       .knex("users")
@@ -29,10 +38,19 @@ const UserModel = {
       .getFirst();
   },
 
-  updateActive: (userId, trx = knex) => {
+  updateActive: (data, trx = knex) => {
     return trx
       .knex("users")
-      .update({ is_active: true })
+      .update({ is_active: true, is_leader: data?.isLeader })
+      .where({ id: data.userId })
+      .returning("*")
+      .getFirst();
+  },
+
+  updateWinner: (userId, isWinner, trx = knex) => {
+    return trx
+      .knex("users")
+      .update({ winner: isWinner })
       .where({ id: userId })
       .returning("*")
       .getFirst();

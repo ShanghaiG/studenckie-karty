@@ -8,7 +8,11 @@ const Card = (data) => {
   const id = data.data.id;
   const cardText = data.data.cardText;
 
-  const { selected, size, onSelect } = data;
+  let { selected, size, onSelect } = data;
+
+  // console.log("co w onSelect jest", onSelect());
+  // console.log("co w selected jest", selected);
+  // // selected = onSelect() ? true : false;
 
   if (type === "ANSWER") {
     return (
@@ -29,11 +33,21 @@ const Card = (data) => {
   }
 
   return (
-    <div className={"card"} data-size={size}>
+    <button
+      type={"button"}
+      className={"card card--main-answer"}
+      data-selected={selected}
+      data-size={size}
+      onClick={() => {
+        onSelect();
+      }}
+    >
+      {/* <div className={"card"} data-size={size}> */}
       <header className={"card__header"}>KARTA GŁÓWNA</header>
       <main className={"card__content"}>{cardText}</main>
       <footer className={"card__footer"}>Studenckie Karty</footer>
-    </div>
+    </button>
+    // </div>
   );
 };
 

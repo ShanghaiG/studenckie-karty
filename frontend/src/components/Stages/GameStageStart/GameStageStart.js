@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import useGameStageStart from "./GameStageStart.hook";
 import Fullscreen from "../../Layouts/Fullscreen";
 import { setCode } from "../../../features/game/gameSlice";

@@ -5,6 +5,7 @@ const updateActive = require("./update-active");
 const updatePoints = require("./update-points");
 const findUser = require("./find");
 const getAvailable = require("./get-available");
+const updateWinnerPlayer = require("./update-winner-player");
 
 module.exports = {
   checkPlayers,
@@ -14,4 +15,5 @@ module.exports = {
   updatePoints,
   findUser,
   getAvailable,
+  updateWinnerPlayer,
 };
