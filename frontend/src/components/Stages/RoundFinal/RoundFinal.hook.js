@@ -10,6 +10,7 @@ const useRoundFinal = () => {
   const [winnerCard, setWinnerCard] = useState(null);
   // const [player, setPlayer] = useState(null);
   const [enabled, setEnabled] = useState(true);
+  const [enabled2, setEnabled2] = useState(true);
 
   if (!mainCard && !winnerCard) {
     socket.emit("getWinnerCard", { round });
@@ -26,9 +27,19 @@ const useRoundFinal = () => {
     });
   }
   console.log("co w mainCard, winnerCard", mainCard, winnerCard);
+
+  const clearMatchup = () => {
+    if (enabled2) {
+      socket.emit("clearPlayers");
+      setEnabled2(false);
+    }
+  };
+
   return {
     mainCard,
     winnerCard,
+    clearMatchup,
+    round,
   };
 };
 

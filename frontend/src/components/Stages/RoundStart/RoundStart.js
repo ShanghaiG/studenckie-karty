@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useRoundFinal from "./RoundFinal.hook";
+import useRoundStart from "./RoundStart.hook";
 import { useSelector } from "react-redux";
 import Players from "../../Players";
 
@@ -7,9 +7,9 @@ import Card from "../../Card/Card";
 import useGameStageWaiting from "../GameStageWaiting/GameStageWaiting.hook";
 import Fullscreen from "../../Layouts/Fullscreen";
 
-const RoundFinal = () => {
-  const { mainCard, winnerCard, clearMatchup, round } = useRoundFinal();
-  const { players, startRound } = useGameStageWaiting();
+const RoundStart = () => {
+  const { getRoundName, startLeaderChooseCard } = useRoundStart();
+  const { players } = useGameStageWaiting();
   // const answerCards = useSelector((state) => state.game.answerCards);
 
   // const [selectedCard, setSelectedCard] = useState(null);
@@ -17,9 +17,12 @@ const RoundFinal = () => {
 
   return (
     <Fullscreen>
-      <h1>Najlepsza karta</h1>
+      <h1>Runda {getRoundName()}</h1>
       {players ? <Players players={players} /> : null}
-      {mainCard ? (
+      {setTimeout(() => {
+        startLeaderChooseCard();
+      }, 10000)}
+      {/* /*{</Fullscreen>{{mainCard ? (
         <div className={"mainCardEnd"}>
           <Card data={mainCard} size={"large"} />
         </div>
@@ -31,12 +34,13 @@ const RoundFinal = () => {
       ) : null}
       {mainCard && winnerCard
         ? setTimeout(() => {
+            console.log("wywowalo sie tutaj");
             clearMatchup();
-            startRound(round + 1);
-          }, 8000)
-        : null}
+            startLeaderChooseCard();
+          }, 20000)
+        : null} */}
     </Fullscreen>
   );
 };
 
-export default RoundFinal;
+export default RoundStart;

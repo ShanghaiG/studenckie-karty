@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
-import { leaderChooseCard } from "../../../features/game/gameSlice";
+import { leaderChooseCard, roundStart } from "../../../features/game/gameSlice";
 
 const socket = io.connect("http://localhost:8001");
 
 const useGameStageWaiting = () => {
   const dispatch = useDispatch();
   const code = useSelector((state) => state.game.code);
+  const round = useSelector((state) => state.game.round);
 
   const [players, setPlayers] = useState([]);
 
@@ -23,11 +24,11 @@ const useGameStageWaiting = () => {
     });
   }, [enabled]);
 
-  const startLeaderChooseCard = () => {
-    dispatch(leaderChooseCard());
+  const startRound = (roundNumber) => {
+    dispatch(roundStart(roundNumber));
   };
 
-  return { players, startLeaderChooseCard };
+  return { players, startRound, round };
 };
 
 export default useGameStageWaiting;

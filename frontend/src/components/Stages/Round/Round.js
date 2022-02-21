@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useRoundOne from "./RoundOne.hook";
+import useRound from "./Round.hook";
 import { useSelector } from "react-redux";
 import Players from "../../Players";
 import Split from "../../Layouts/Split";
@@ -7,9 +7,9 @@ import Card from "../../Card/Card";
 import useGameStageWaiting from "../GameStageWaiting/GameStageWaiting.hook";
 import useLeaderChooseWinner from "../LeaderChooseWinner/LeaderChooseWinner.hook";
 
-const RoundOne = () => {
+const Round = () => {
   const { player, setPlayerAnswered, getMainCard, trueMainCard, updateCard } =
-    useRoundOne();
+    useRound();
   const { players } = useGameStageWaiting();
 
   const answerCards = useSelector((state) => state.game.answerCards);
@@ -50,11 +50,7 @@ const RoundOne = () => {
         )
       }
     >
-      {isCardSelected ? (
-        <h1>Oczekiwanie na koniec rundy</h1>
-      ) : (
-        <h1>Runda Pierwsza</h1>
-      )}
+      {isCardSelected ? <h1>Oczekiwanie na koniec rundy</h1> : null}
       {getMainCard()}
       {trueMainCard ? (
         <div className={"mainCard"}>
@@ -70,4 +66,4 @@ const RoundOne = () => {
   );
 };
 
-export default RoundOne;
+export default Round;

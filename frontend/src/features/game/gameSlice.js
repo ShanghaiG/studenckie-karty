@@ -62,11 +62,10 @@ export const startGame = (code) => async (dispatch) => {
 };
 
 export const roundOne = () => async (dispatch) => {
-  dispatch(setStage("ROUND_ONE"));
+  dispatch(setStage("ROUND"));
 };
 
 export const leaderChooseCard = () => async (dispatch) => {
-  dispatch(setRound(1));
   dispatch(setStage("LEADER_CHOOSE_CARD"));
 };
 
@@ -76,6 +75,16 @@ export const leaderChooseWinner = () => async (dispatch) => {
 
 export const roundEnd = () => async (dispatch) => {
   dispatch(setStage("ROUND_END"));
+};
+
+export const roundStart = (round) => async (dispatch) => {
+  console.log("round w roundStart dispatch to", round);
+  if (!round) {
+    dispatch(setRound(1));
+  } else {
+    dispatch(setRound(round));
+  }
+  dispatch(setStage("ROUND_START"));
 };
 
 export const gameSlice = createSlice({

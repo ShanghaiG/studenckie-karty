@@ -4,7 +4,7 @@ import io from "socket.io-client";
 
 const socket = io.connect("http://localhost:8001");
 
-const useRoundOne = () => {
+const useRound = () => {
   const currentPlayer = useSelector((state) => state.game.player);
   const round = useSelector((state) => state.game.round);
   const [mainCard, setMainCard] = useState(null);
@@ -68,4 +68,4 @@ const useRoundOne = () => {
   };
 };
 
-export default useRoundOne;
+export default useRound;

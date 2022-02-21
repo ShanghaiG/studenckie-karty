@@ -20,7 +20,7 @@ const useLeaderCardsSelect = () => {
     socket.emit("updatePlayer", { player, answer: true });
     socket.emit("getPlayers");
   };
-  const startRoundOne = () => {
+  const startRound = () => {
     dispatch(roundOne());
   };
 
@@ -28,7 +28,7 @@ const useLeaderCardsSelect = () => {
     dispatch(leaderChooseWinner());
   };
 
-  return { startRoundOne, setMainCard, setPlayerAnswered, startChooseWinner };
+  return { startRound, setMainCard, setPlayerAnswered, startChooseWinner };
 };
 
 export default useLeaderCardsSelect;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useRoundOne from "../RoundOne/RoundOne.hook";
+import useRound from "../Round/Round.hook";
 import { useSelector } from "react-redux";
 import Players from "../../Players";
 import Split from "../../Layouts/Split";
@@ -12,9 +12,9 @@ import useLeaderCardsSelect from "./LeaderCardsSelect.hook";
 const socket = io.connect("http://localhost:8001");
 
 const LeaderCardsSelect = () => {
-  const { player, mainCard } = useRoundOne();
+  const { player, mainCard } = useRound();
   const { players } = useGameStageWaiting();
-  const { startRoundOne, setMainCard, setPlayerAnswered, startChooseWinner } =
+  const { startRound, setMainCard, setPlayerAnswered, startChooseWinner } =
     useLeaderCardsSelect();
 
   const mainCards = useSelector((state) => state.game.mainCards);
@@ -50,7 +50,7 @@ const LeaderCardsSelect = () => {
     <Fullscreen>
       <h1>Oczekiwanie na lidera</h1>
       <Players players={players} />
-      {mainCard ? startRoundOne() : null}
+      {mainCard ? startRound() : null}
     </Fullscreen>
   );
 };

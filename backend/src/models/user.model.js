@@ -20,6 +20,24 @@ const UserModel = {
       .where({ is_active: true });
   },
 
+  cleanUp: (trx = knex) => {
+    return trx
+      .knex("users")
+      .update({ has_answered: false, is_leader: false })
+      .where({ has_answered: true })
+      .returning("*")
+      .getFirst();
+  },
+
+  setLeader: (userId, trx = knex) => {
+    return trx
+      .knex("users")
+      .update({ is_leader: true })
+      .where({ id: userId })
+      .returning("*")
+      .getFirst();
+  },
+
   update: (userId, data, trx = knex) => {
     return trx
       .knex("users")

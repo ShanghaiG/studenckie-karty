@@ -36,7 +36,7 @@ const Players = (props) => {
   return (
     <React.Fragment>
       <div className={"playersLeftSlot"}>
-        {players.slice(0, 3).map((player) => {
+        {players.slice(0, 2).map((player) => {
           return (
             <div key={player.id}>
               <Player player={player} side={"left"} />
@@ -45,7 +45,7 @@ const Players = (props) => {
         })}
       </div>
       <div className={"playersRightSlot"}>
-        {players.slice(3, 6).map((player) => {
+        {players.slice(2, 4).map((player) => {
           return (
             <div key={player.id}>
               <Player player={player} side={"right"} />

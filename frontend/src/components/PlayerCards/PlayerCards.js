@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import GameStageStart from "../Stages/GameStageStart";
 import GameStageWaiting from "../Stages/GameStageWaiting";
 
-import RoundOne from "../Stages/RoundOne";
+import Round from "../Stages/Round";
 import LeaderCardsSelect from "../Stages/LeaderCardsSelect";
 import LeaderChooseWinner from "../Stages/LeaderChooseWinner";
 import RoundFinal from "../Stages/RoundFinal";
+import RoundStart from "../Stages/RoundStart";
 
 /**
  * PlayerCards component
@@ -21,10 +22,12 @@ const PlayerCards = () => {
       return <GameStageStart />;
     case "WAITING":
       return <GameStageWaiting />;
+    case "ROUND_START":
+      return <RoundStart />;
     case "LEADER_CHOOSE_CARD":
       return <LeaderCardsSelect />;
-    case "ROUND_ONE":
-      return <RoundOne />;
+    case "ROUND":
+      return <Round />;
     case "LEADER_CHOOSE_WINNER":
       return <LeaderChooseWinner />;
     case "ROUND_END":

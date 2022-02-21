@@ -5,6 +5,8 @@ const {
   updateActive,
   findUser,
   updateWinnerPlayer,
+  cleanUp,
+  updatePlayer,
 } = require("../services/users");
 const {
   updateGame,
@@ -88,11 +90,15 @@ module.exports = (httpServer) => {
     });
 
     socket.on("updatePlayer", async (data) => {
-      const user = await UserModel.update(data?.player?.id, {
+      const user = await updatePlayer(data?.player?.id, {
         has_answered: data.answer,
       });
 
       socket.emit("sendPlayer", user);
+    });
+
+    socket.on("clearPlayers", async () => {
+      await cleanUp();
     });
 
     socket.on("updateWinnerPlayer", async (data) => {
