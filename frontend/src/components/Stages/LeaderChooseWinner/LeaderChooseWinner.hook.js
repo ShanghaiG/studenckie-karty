@@ -12,10 +12,11 @@ const useLeaderChooseWinner = () => {
   const [mainCard, setMainCard] = useState(null);
   const [cards, setCards] = useState([]);
   const [players, setPlayers] = useState([]);
+  const [isWinnerCard, setIsWinnerCard] = useState(false);
+  const [cardId, setCardId] = useState(null);
 
   useEffect(() => {
     if (!players.length) {
-      console.log("players w Winner");
       socket.emit("getPlayers");
     }
 
@@ -26,24 +27,13 @@ const useLeaderChooseWinner = () => {
 
   useEffect(() => {
     socket.on("sendPlayers", (data) => {
-      console.log("sendCards Winner", data);
       setPlayers(data);
     });
 
-    return () => {
-      socket.off("sendPlayers");
-    };
-  }, []);
-
-  if (!mainCard) {
-    socket.emit("getMainCard", { round });
     socket.on("sendMainCard2", (data) => {
       setMainCard(data);
     });
-  }
 
-  if (!cards.length || cards.includes(null)) {
-    socket.emit("getCards", { round });
     socket.on("sendCards", (data) => {
       if (data.includes(null)) {
         return;
@@ -51,36 +41,59 @@ const useLeaderChooseWinner = () => {
         setCards(data);
       }
     });
-  }
+
+    return () => {
+      socket.off("sendPlayers");
+      socket.off("sendMainCard2");
+      socket.off("sendCards");
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!mainCard) {
+      socket.emit("getMainCard", { round });
+    }
+
+    if (!cards.length || cards.includes(null)) {
+      socket.emit("getCards", { round });
+    }
+
+    if (cardId) {
+      socket.emit("setWinnerCard", {
+        round,
+        cardId: cardId.id,
+      });
+    }
+
+    return () => {
+      socket.off("getMainCard");
+      socket.off("getCards");
+      socket.off("setWinnerCard");
+    };
+  });
 
   const setWinnerCard = (data) => {
-    socket.emit("setWinnerCard", {
-      round,
-      cardId: data.id,
-    });
+    if (!cardId) {
+      setCardId(data);
+    }
+
+    if (!isWinnerCard) {
+      setIsWinnerCard(true);
+    }
   };
 
   const startRoundEnd = () => {
     dispatch(roundEnd());
   };
-  //   const setMainCard = (player, data) => {
-  //     console.log("co w playerId, data", player, data);
-  //     socket.emit("updateMainCard", {
-  //       user_id: player.id,
-  //       round,
-  //       main_card: data.id,
-  //     });
-  //   };
 
-  //   const setPlayerAnswered = (player) => {
-  //     socket.emit("updatePlayer", { player, answer: true });
-  //     socket.emit("getPlayers");
-  //   };
-  //   const startRoundOne = () => {
-  //     dispatch(roundOne());
-  //   };
-
-  return { mainCard, cards, setWinnerCard, startRoundEnd, players };
+  return {
+    mainCard,
+    cards,
+    setWinnerCard,
+    startRoundEnd,
+    players,
+    isWinnerCard,
+  };
 };
 
 export default useLeaderChooseWinner;

@@ -8,10 +8,12 @@ const socket = io.connect("http://localhost:8001");
 const useLeaderCardsSelect = () => {
   const dispatch = useDispatch();
   const round = useSelector((state) => state.game.round);
+  const currentPlayer = useSelector((state) => state.game.player);
 
   const [playerData, setPlayerData] = useState(null);
   const [players, setPlayers] = useState([]);
   const [mainCardData, setMainCardData] = useState(null);
+  const [player, setPlayer] = useState(null);
 
   const setMainCard = (player, data) => {
     if (!playerData) {
@@ -53,7 +55,6 @@ const useLeaderCardsSelect = () => {
 
   useEffect(() => {
     if (!players.length) {
-      console.log("players w LeaderCardsSelect", players);
       socket.emit("getPlayers");
     }
 
@@ -64,8 +65,15 @@ const useLeaderCardsSelect = () => {
 
   useEffect(() => {
     socket.on("sendPlayers", (data) => {
-      console.log("sendCards LeaderCardsSelect", data);
       setPlayers(data);
+
+      if (data) {
+        for (const player of data) {
+          if (player.isLeader && player.id === currentPlayer.id) {
+            setPlayer(player);
+          }
+        }
+      }
     });
 
     return () => {
@@ -78,6 +86,8 @@ const useLeaderCardsSelect = () => {
     setMainCard,
     startChooseWinner,
     players,
+    player,
+    mainCardData,
   };
 };
 

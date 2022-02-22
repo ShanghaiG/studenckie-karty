@@ -9,9 +9,14 @@ import Fullscreen from "../../Layouts/Fullscreen";
 import useLeaderCardsSelect from "./LeaderCardsSelect.hook";
 
 const LeaderCardsSelect = () => {
-  const { player, mainCard } = useRound();
-  const { players, startRound, setMainCard, startChooseWinner } =
-    useLeaderCardsSelect();
+  const {
+    players,
+    startRound,
+    setMainCard,
+    startChooseWinner,
+    player,
+    mainCardData,
+  } = useLeaderCardsSelect();
 
   const mainCards = useSelector((state) => state.game.mainCards);
 
@@ -37,10 +42,10 @@ const LeaderCardsSelect = () => {
       })}
     >
       <h1>Wybierz kartę główną</h1>
-      {mainCard
+      {mainCardData && player.isLeader
         ? setTimeout(() => {
             startChooseWinner();
-          }, 2000)
+          }, 4000)
         : null}
       <Players players={players} />
     </Split>
@@ -51,11 +56,10 @@ const LeaderCardsSelect = () => {
       {players.some((player) => player.isLeader && player.hasAnswered)
         ? setTimeout(() => {
             startRound();
-          }, 2000)
+          }, 4000)
         : null}
     </Fullscreen>
   );
 };
 
 export default LeaderCardsSelect;
-//updatedPlayers?.some((player) => player.isLeader && player.hasAnswered

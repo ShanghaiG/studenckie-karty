@@ -4,12 +4,10 @@ import { useSelector } from "react-redux";
 import Players from "../../Players";
 import Split from "../../Layouts/Split";
 import Card from "../../Card/Card";
-import useGameStageWaiting from "../GameStageWaiting/GameStageWaiting.hook";
 import useLeaderChooseWinner from "../LeaderChooseWinner/LeaderChooseWinner.hook";
 
 const Round = () => {
-  const { player, players, getMainCard, trueMainCard, updateCard } = useRound();
-  // const { players } = useGameStageWaiting();
+  const { players, updateCard, mainCard, updateUser } = useRound();
 
   const answerCards = useSelector((state) => state.game.answerCards);
 
@@ -39,7 +37,8 @@ const Round = () => {
                   onSelect={() => {
                     setSelectedCard(element);
                     setIsCardSelected(true);
-                    updateCard(player, element);
+                    updateCard(element);
+                    updateUser();
                   }}
                 />
               </div>
@@ -49,16 +48,18 @@ const Round = () => {
       }
     >
       {isCardSelected ? <h1>Oczekiwanie na koniec rundy</h1> : null}
-      {getMainCard()}
-      {trueMainCard ? (
+
+      {mainCard ? (
         <div className={"mainCard"}>
-          <Card data={trueMainCard} />
+          <Card data={mainCard} />
         </div>
       ) : null}
       <Players players={players} />
       {players?.length === 4 &&
       players.every((player) => player.hasAnswered === true)
-        ? startRoundEnd()
+        ? setTimeout(() => {
+            startRoundEnd();
+          }, 4000)
         : null}
     </Split>
   );

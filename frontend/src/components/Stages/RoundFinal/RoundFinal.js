@@ -1,21 +1,15 @@
 import React, { useState } from "react";
 import useRoundFinal from "./RoundFinal.hook";
-import { useSelector } from "react-redux";
 import Players from "../../Players";
 
 import Card from "../../Card/Card";
-import useGameStageWaiting from "../GameStageWaiting/GameStageWaiting.hook";
 import Fullscreen from "../../Layouts/Fullscreen";
 
 const RoundFinal = () => {
-  const { mainCard, winnerCard, clearMatchup, round } = useRoundFinal();
-  const { players, startRound } = useGameStageWaiting();
-  // const answerCards = useSelector((state) => state.game.answerCards);
+  const { mainCard, winnerCard, clearMatchup, round, players, startRound } =
+    useRoundFinal();
 
-  // const [selectedCard, setSelectedCard] = useState(null);
-  // const [isCardSelected, setIsCardSelected] = useState(false);
-
-  return (
+  return mainCard && winnerCard ? (
     <Fullscreen>
       <h1>Najlepsza karta</h1>
       {players ? <Players players={players} /> : null}
@@ -32,9 +26,14 @@ const RoundFinal = () => {
       {mainCard && winnerCard
         ? setTimeout(() => {
             clearMatchup();
-            startRound(round + 1);
+            // startRound(round + 1);
           }, 8000)
         : null}
+    </Fullscreen>
+  ) : (
+    <Fullscreen>
+      <h1>Oczekiwanie na wybór lidera</h1>
+      {players ? <Players players={players} /> : null}
     </Fullscreen>
   );
 };

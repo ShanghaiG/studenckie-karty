@@ -3,18 +3,17 @@ import Players from "../../Players";
 import Split from "../../Layouts/Split";
 import Card from "../../Card/Card";
 
-import useGameStageWaiting from "../GameStageWaiting/GameStageWaiting.hook";
 import useLeaderChooseWinner from "./LeaderChooseWinner.hook";
 
 const LeaderChooseWinner = () => {
-  //   const { players } = useGameStageWaiting();
-  const { mainCard, cards, setWinnerCard, startRoundEnd, players } =
-    useLeaderChooseWinner();
-
-  //   const { startRoundOne, setMainCard, setPlayerAnswered } =
-  //     useLeaderCardsSelect();
-
-  //   const mainCards = useSelector((state) => state.game.mainCards);
+  const {
+    mainCard,
+    cards,
+    setWinnerCard,
+    startRoundEnd,
+    players,
+    isWinnerCard,
+  } = useLeaderChooseWinner();
 
   const [selectedCard, setSelectedCard] = useState(null);
   const [isCardSelected, setIsCardSelected] = useState(false);
@@ -57,11 +56,11 @@ const LeaderChooseWinner = () => {
       ) : null}
 
       <Players players={players} />
-      {/* {players.every((player) => player.hasAnswered === true)
+      {isWinnerCard && players.every((player) => player.hasAnswered === true)
         ? setTimeout(() => {
             startRoundEnd();
-          }, 2000)
-        : null} */}
+          }, 4000)
+        : null}
     </Split>
   );
 };

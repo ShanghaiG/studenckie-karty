@@ -85,16 +85,22 @@ module.exports = (httpServer) => {
     });
 
     socket.on("getPlayer", async (player) => {
+      console.log("co w player", player);
       const user = await findUser(player?.id);
       socket.emit("sendPlayer", user);
     });
 
     socket.on("updatePlayer", async (data) => {
+      console.log("co jest w data w updatePlayer", data);
       const user = await updatePlayer(data?.player?.id, {
         has_answered: data.answer,
       });
 
-      socket.emit("sendPlayer", user);
+      // const users = await UserModel.findAll();
+
+      // socket.emit("sendPlayers", users);
+
+      // socket.emit("sendPlayer", users);
     });
 
     socket.on("clearPlayers", async () => {
