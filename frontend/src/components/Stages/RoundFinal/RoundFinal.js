@@ -6,12 +6,16 @@ import Card from "../../Card/Card";
 import Fullscreen from "../../Layouts/Fullscreen";
 
 const RoundFinal = () => {
-  const { mainCard, winnerCard, clearMatchup, round, players, startRound } =
+  const { mainCard, winnerCard, clearMatchup, players, startRound, isCleared } =
     useRoundFinal();
 
-  return mainCard && winnerCard ? (
+  return (
     <Fullscreen>
-      <h1>Najlepsza karta</h1>
+      {mainCard && winnerCard ? (
+        <h1>Najlepsza karta</h1>
+      ) : (
+        <h1>Oczekiwanie na wybór lidera</h1>
+      )}
       {players ? <Players players={players} /> : null}
       {mainCard ? (
         <div className={"mainCardEnd"}>
@@ -26,14 +30,13 @@ const RoundFinal = () => {
       {mainCard && winnerCard
         ? setTimeout(() => {
             clearMatchup();
-            // startRound(round + 1);
-          }, 8000)
+          }, 5000)
         : null}
-    </Fullscreen>
-  ) : (
-    <Fullscreen>
-      <h1>Oczekiwanie na wybór lidera</h1>
-      {players ? <Players players={players} /> : null}
+      {isCleared
+        ? setTimeout(() => {
+            startRound();
+          }, 7000)
+        : null}
     </Fullscreen>
   );
 };

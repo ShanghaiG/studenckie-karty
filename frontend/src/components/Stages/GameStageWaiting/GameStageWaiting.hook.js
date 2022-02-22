@@ -28,8 +28,8 @@ const useGameStageWaiting = () => {
     };
   }, []);
 
-  const startRound = (roundNumber) => {
-    dispatch(roundStart(roundNumber));
+  const startRound = () => {
+    dispatch(roundStart());
   };
 
   return { players, startRound, round };

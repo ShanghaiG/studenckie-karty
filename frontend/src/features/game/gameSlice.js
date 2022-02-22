@@ -77,13 +77,18 @@ export const roundEnd = () => async (dispatch) => {
   dispatch(setStage("ROUND_END"));
 };
 
-export const roundStart = (round) => async (dispatch) => {
-  console.log("round w roundStart dispatch to", round);
-  if (!round) {
-    dispatch(setRound(1));
-  } else {
-    dispatch(setRound(round));
-  }
+export const roundStart = () => async (dispatch) => {
+  dispatch(setRound(1));
+  dispatch(setStage("ROUND_START"));
+};
+
+export const roundSecond = () => async (dispatch) => {
+  dispatch(setRound(2));
+  dispatch(setStage("ROUND_START"));
+};
+
+export const roundThird = () => async (dispatch) => {
+  dispatch(setRound(3));
   dispatch(setStage("ROUND_START"));
 };
 

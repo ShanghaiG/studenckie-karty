@@ -7,6 +7,7 @@ const {
   updateWinnerPlayer,
   cleanUp,
   updatePlayer,
+  updatePoints,
 } = require("../services/users");
 const {
   updateGame,
@@ -45,7 +46,7 @@ module.exports = (httpServer) => {
     });
 
     socket.on("updateMainCard", async (data) => {
-      const card = await updateGame(data.user_id, data.round, {
+      await updateGame(data.user_id, data.round, {
         main_card_id: data.main_card,
       });
 
@@ -55,7 +56,7 @@ module.exports = (httpServer) => {
     });
 
     socket.on("updateAnswerCard", async (data) => {
-      const card = await updateGame(data.user_id, data.round, {
+      await updateGame(data.user_id, data.round, {
         answer_card_id: data.answer_card,
       });
     });
@@ -85,22 +86,14 @@ module.exports = (httpServer) => {
     });
 
     socket.on("getPlayer", async (player) => {
-      console.log("co w player", player);
       const user = await findUser(player?.id);
       socket.emit("sendPlayer", user);
     });
 
     socket.on("updatePlayer", async (data) => {
-      console.log("co jest w data w updatePlayer", data);
-      const user = await updatePlayer(data?.player?.id, {
+      await updatePlayer(data?.player?.id, {
         has_answered: data.answer,
       });
-
-      // const users = await UserModel.findAll();
-
-      // socket.emit("sendPlayers", users);
-
-      // socket.emit("sendPlayer", users);
     });
 
     socket.on("clearPlayers", async () => {
@@ -109,7 +102,15 @@ module.exports = (httpServer) => {
 
     socket.on("updateWinnerPlayer", async (data) => {
       const user = await updateWinnerPlayer(data.round);
-      console.log("updateWinnerPlayer user", user);
+
+      socket.emit("sendUpdateWinnerPlayer", user);
+    });
+
+    socket.on("updatePoints", async (data) => {
+      if (data) {
+        await updatePoints(data.id);
+        socket.emit("sendUpdatePoints");
+      }
     });
 
     socket.on("disconnect", () => {

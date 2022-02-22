@@ -120,6 +120,15 @@ body {
     opacity: 0;
   }
   to {
+    opacity: 90;
+  }
+}
+
+@keyframes test2 {
+  from {
+    opacity: 60;
+  }
+  to {
     opacity: 100;
   }
 }
@@ -130,7 +139,7 @@ h1 {
   line-height: 1em;
   color: #f2b211;
   animation-name: test;
-  animation-duration: 5s;
+  animation-duration: 3s;
 }
 
 .startForm {
@@ -161,12 +170,21 @@ h1 {
   top: 4em;
 }
 
+@keyframes playerAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100;
+  }
+}
+
 .player {
   display: flex;
   align-items: center;
   margin: 2em 0;
-  animation-name: test;
-  animation-duration: 5s;
+  animation-name: playerAnimation;
+  animation-duration: 2s;
 
   &[data-size="large"] {
     font-size: 2.2em;

@@ -7,7 +7,7 @@ import Card from "../../Card/Card";
 import useLeaderChooseWinner from "../LeaderChooseWinner/LeaderChooseWinner.hook";
 
 const Round = () => {
-  const { players, updateCard, mainCard, updateUser } = useRound();
+  const { players, updateCard, mainCard, updateUser, winnerCard } = useRound();
 
   const answerCards = useSelector((state) => state.game.answerCards);
 
@@ -55,8 +55,8 @@ const Round = () => {
         </div>
       ) : null}
       <Players players={players} />
-      {players?.length === 4 &&
-      players.every((player) => player.hasAnswered === true)
+      {players.every((player) => player.hasAnswered === true) &&
+      players.some((player) => player.winner)
         ? setTimeout(() => {
             startRoundEnd();
           }, 4000)

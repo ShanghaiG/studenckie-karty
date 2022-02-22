@@ -5,13 +5,13 @@ import Players from "../../Players";
 import Fullscreen from "../../Layouts/Fullscreen";
 
 const GameStageWaiting = () => {
-  const { players, startRound, round } = useGameStageWaiting();
+  const { players, startRound } = useGameStageWaiting();
 
   return (
     <Fullscreen>
       <h1>Gra zaraz się rozpocznie</h1>
       {players ? <Players players={players} /> : null}
-      {players?.length === 4 ? startRound(round) : null}
+      {players?.length === 4 ? startRound() : null}
     </Fullscreen>
   );
 };
