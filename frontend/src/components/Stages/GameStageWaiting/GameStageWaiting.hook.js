@@ -12,17 +12,21 @@ const useGameStageWaiting = () => {
 
   const [players, setPlayers] = useState([]);
 
-  let enabled = true;
   useEffect(() => {
-    if (!enabled) {
-      return;
+    if (!players.length) {
+      socket.emit("getPlayers", { room: code });
     }
-    socket.emit("getPlayers", { room: code });
+  }, [players, code]);
+
+  useEffect(() => {
     socket.on("sendPlayers", (data) => {
-      enabled = false;
       setPlayers(data);
     });
-  }, [enabled]);
+
+    return () => {
+      socket.off("sendPlayers");
+    };
+  }, []);
 
   const startRound = (roundNumber) => {
     dispatch(roundStart(roundNumber));

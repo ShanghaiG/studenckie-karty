@@ -8,10 +8,27 @@ const socket = io.connect("http://localhost:8001");
 const useRoundStart = () => {
   const dispatch = useDispatch();
   const round = useSelector((state) => state.game.round);
+  const [players, setPlayers] = useState([]);
 
   const startLeaderChooseCard = () => {
     dispatch(leaderChooseCard());
   };
+
+  useEffect(() => {
+    if (!players.length) {
+      socket.emit("getPlayers");
+    }
+  }, [players]);
+
+  useEffect(() => {
+    socket.on("sendPlayers", (data) => {
+      setPlayers(data);
+    });
+
+    return () => {
+      socket.off("sendPlayers");
+    };
+  }, []);
 
   const getRoundName = () => {
     switch (round) {
@@ -29,32 +46,8 @@ const useRoundStart = () => {
         return null;
     }
   };
-  // const [mainCard, setMainCard] = useState(null);
-  // const [winnerCard, setWinnerCard] = useState(null);
-  // // const [player, setPlayer] = useState(null);
-  // const [enabled, setEnabled] = useState(true);
 
-  // if (!mainCard && !winnerCard) {
-  //   socket.emit("getWinnerCard", { round });
-
-  //   if (enabled) {
-  //     socket.emit("updateWinnerPlayer", { round });
-  //     socket.emit("getPlayers");
-  //     setEnabled(false);
-  //   }
-
-  //   socket.on("sendWinnerCards", (data) => {
-  //     setMainCard(data.mainCard);
-  //     setWinnerCard(data.winnerCard);
-  //   });
-  // }
-  // console.log("co w mainCard, winnerCard", mainCard, winnerCard);
-
-  // const clearMatchup = () => {
-  //   socket.emit("clearPlayers");
-  // };
-
-  return { startLeaderChooseCard, getRoundName };
+  return { startLeaderChooseCard, getRoundName, players };
 };
 
 export default useRoundStart;

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
 import {
@@ -10,12 +11,11 @@ const socket = io.connect("http://localhost:8001");
 const useGameStageStart = () => {
   const dispatch = useDispatch();
   const code = useSelector((state) => state.game.code);
+  const player = useSelector((state) => state.game.player);
 
   const dispatchUser = () => {
     dispatch(preloadAvailableUser());
   };
-
-  const player = useSelector((state) => state.game.player);
 
   const checkForm = () => {
     if (code === "5sbs7") {
@@ -23,9 +23,11 @@ const useGameStageStart = () => {
     }
   };
 
-  if (player instanceof Object) {
-    socket.emit("joinRoom", { room: code, player });
-  }
+  useEffect(() => {
+    if (player instanceof Object && code === "5sbs7") {
+      socket.emit("joinRoom", { room: code, player });
+    }
+  }, [code, player]);
 
   return {
     code,

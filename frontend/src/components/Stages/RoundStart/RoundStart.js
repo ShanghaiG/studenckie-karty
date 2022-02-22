@@ -8,8 +8,8 @@ import useGameStageWaiting from "../GameStageWaiting/GameStageWaiting.hook";
 import Fullscreen from "../../Layouts/Fullscreen";
 
 const RoundStart = () => {
-  const { getRoundName, startLeaderChooseCard } = useRoundStart();
-  const { players } = useGameStageWaiting();
+  const { getRoundName, startLeaderChooseCard, players } = useRoundStart();
+  // const { players } = useGameStageWaiting();
   // const answerCards = useSelector((state) => state.game.answerCards);
 
   // const [selectedCard, setSelectedCard] = useState(null);

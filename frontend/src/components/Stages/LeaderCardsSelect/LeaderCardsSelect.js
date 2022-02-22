@@ -4,17 +4,13 @@ import { useSelector } from "react-redux";
 import Players from "../../Players";
 import Split from "../../Layouts/Split";
 import Card from "../../Card/Card";
-import io from "socket.io-client";
 import useGameStageWaiting from "../GameStageWaiting/GameStageWaiting.hook";
 import Fullscreen from "../../Layouts/Fullscreen";
 import useLeaderCardsSelect from "./LeaderCardsSelect.hook";
 
-const socket = io.connect("http://localhost:8001");
-
 const LeaderCardsSelect = () => {
   const { player, mainCard } = useRound();
-  const { players } = useGameStageWaiting();
-  const { startRound, setMainCard, setPlayerAnswered, startChooseWinner } =
+  const { players, startRound, setMainCard, startChooseWinner } =
     useLeaderCardsSelect();
 
   const mainCards = useSelector((state) => state.game.mainCards);
@@ -26,7 +22,7 @@ const LeaderCardsSelect = () => {
     <Split
       footer={mainCards?.map((element) => {
         return (
-          <div className={"footerCards"}>
+          <div className={"footerCards"} key={element.id}>
             <Card
               data={element}
               selected={element.id === selectedCard?.id ? true : false}
@@ -34,8 +30,6 @@ const LeaderCardsSelect = () => {
                 setSelectedCard(element);
                 setIsCardSelected(true);
                 setMainCard(player, element);
-                setPlayerAnswered(player);
-                startChooseWinner();
               }}
             />
           </div>
@@ -43,14 +37,22 @@ const LeaderCardsSelect = () => {
       })}
     >
       <h1>Wybierz kartę główną</h1>
-
+      {mainCard
+        ? setTimeout(() => {
+            startChooseWinner();
+          }, 2000)
+        : null}
       <Players players={players} />
     </Split>
   ) : (
     <Fullscreen>
       <h1>Oczekiwanie na lidera</h1>
       <Players players={players} />
-      {mainCard ? startRound() : null}
+      {players.some((player) => player.isLeader && player.hasAnswered)
+        ? setTimeout(() => {
+            startRound();
+          }, 2000)
+        : null}
     </Fullscreen>
   );
 };

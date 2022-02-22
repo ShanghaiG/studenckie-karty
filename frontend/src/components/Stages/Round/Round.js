@@ -8,9 +8,8 @@ import useGameStageWaiting from "../GameStageWaiting/GameStageWaiting.hook";
 import useLeaderChooseWinner from "../LeaderChooseWinner/LeaderChooseWinner.hook";
 
 const Round = () => {
-  const { player, setPlayerAnswered, getMainCard, trueMainCard, updateCard } =
-    useRound();
-  const { players } = useGameStageWaiting();
+  const { player, players, getMainCard, trueMainCard, updateCard } = useRound();
+  // const { players } = useGameStageWaiting();
 
   const answerCards = useSelector((state) => state.game.answerCards);
 
@@ -33,7 +32,7 @@ const Round = () => {
         ) : (
           answerCards?.map((element) => {
             return (
-              <div className={"footerCards"}>
+              <div className={"footerCards"} key={element.id}>
                 <Card
                   data={element}
                   selected={element.id === selectedCard?.id ? true : false}
@@ -41,7 +40,6 @@ const Round = () => {
                     setSelectedCard(element);
                     setIsCardSelected(true);
                     updateCard(player, element);
-                    setPlayerAnswered(player);
                   }}
                 />
               </div>

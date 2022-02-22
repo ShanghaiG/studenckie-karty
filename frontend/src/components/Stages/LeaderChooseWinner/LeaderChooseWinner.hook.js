@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
 import { roundEnd } from "../../../features/game/gameSlice";
@@ -11,6 +11,29 @@ const useLeaderChooseWinner = () => {
 
   const [mainCard, setMainCard] = useState(null);
   const [cards, setCards] = useState([]);
+  const [players, setPlayers] = useState([]);
+
+  useEffect(() => {
+    if (!players.length) {
+      console.log("players w Winner");
+      socket.emit("getPlayers");
+    }
+
+    return () => {
+      socket.off("getPlayers");
+    };
+  }, [players]);
+
+  useEffect(() => {
+    socket.on("sendPlayers", (data) => {
+      console.log("sendCards Winner", data);
+      setPlayers(data);
+    });
+
+    return () => {
+      socket.off("sendPlayers");
+    };
+  }, []);
 
   if (!mainCard) {
     socket.emit("getMainCard", { round });
@@ -57,7 +80,7 @@ const useLeaderChooseWinner = () => {
   //     dispatch(roundOne());
   //   };
 
-  return { mainCard, cards, setWinnerCard, startRoundEnd };
+  return { mainCard, cards, setWinnerCard, startRoundEnd, players };
 };
 
 export default useLeaderChooseWinner;

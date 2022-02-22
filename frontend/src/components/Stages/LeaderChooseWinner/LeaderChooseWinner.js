@@ -7,8 +7,8 @@ import useGameStageWaiting from "../GameStageWaiting/GameStageWaiting.hook";
 import useLeaderChooseWinner from "./LeaderChooseWinner.hook";
 
 const LeaderChooseWinner = () => {
-  const { players } = useGameStageWaiting();
-  const { mainCard, cards, setWinnerCard, startRoundEnd } =
+  //   const { players } = useGameStageWaiting();
+  const { mainCard, cards, setWinnerCard, startRoundEnd, players } =
     useLeaderChooseWinner();
 
   //   const { startRoundOne, setMainCard, setPlayerAnswered } =
@@ -22,24 +22,31 @@ const LeaderChooseWinner = () => {
   return (
     <Split
       footer={
-        cards.length && !cards.includes(null)
-          ? cards?.map((element) => {
-              return (
-                <div className={"footerCards"}>
-                  <Card
-                    data={element}
-                    selected={element.id === selectedCard?.id ? true : false}
-                    onSelect={() => {
-                      setSelectedCard(element);
-                      setIsCardSelected(true);
-                      setWinnerCard(element);
-                      startRoundEnd();
-                    }}
-                  />
-                </div>
-              );
-            })
-          : null
+        isCardSelected ? (
+          <div className={"footerCards"}>
+            <Card
+              data={selectedCard}
+              selected={selectedCard ? true : false}
+              onSelect={() => {}}
+            />
+          </div>
+        ) : cards.length && !cards.includes(null) ? (
+          cards?.map((element) => {
+            return (
+              <div className={"footerCards"} key={element.id}>
+                <Card
+                  data={element}
+                  selected={element.id === selectedCard?.id ? true : false}
+                  onSelect={() => {
+                    setSelectedCard(element);
+                    setIsCardSelected(true);
+                    setWinnerCard(element);
+                  }}
+                />
+              </div>
+            );
+          })
+        ) : null
       }
     >
       <h1>Wybierz zwycięzcę</h1>
@@ -50,6 +57,11 @@ const LeaderChooseWinner = () => {
       ) : null}
 
       <Players players={players} />
+      {/* {players.every((player) => player.hasAnswered === true)
+        ? setTimeout(() => {
+            startRoundEnd();
+          }, 2000)
+        : null} */}
     </Split>
   );
 };
