@@ -8,6 +8,7 @@ import LeaderCardsSelect from "../Stages/LeaderCardsSelect";
 import LeaderChooseWinner from "../Stages/LeaderChooseWinner";
 import RoundFinal from "../Stages/RoundFinal";
 import RoundStart from "../Stages/RoundStart";
+import GameEnd from "../Stages/GameEnd";
 
 /**
  * PlayerCards component
@@ -32,6 +33,8 @@ const PlayerCards = () => {
       return <LeaderChooseWinner />;
     case "ROUND_END":
       return <RoundFinal />;
+    case "GAME_END":
+      return <GameEnd />;
     default:
       return null;
   }

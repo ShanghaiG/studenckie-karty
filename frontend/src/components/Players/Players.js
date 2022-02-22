@@ -1,7 +1,7 @@
 import React from "react";
 import usePlayers from "./Players.hook";
 
-const Player = (props) => {
+export const Player = (props) => {
   const { player, side, size } = props;
 
   return (

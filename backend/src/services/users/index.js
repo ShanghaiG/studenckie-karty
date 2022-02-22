@@ -8,6 +8,7 @@ const getAvailable = require("./get-available");
 const updateWinnerPlayer = require("./update-winner-player");
 const cleanUp = require("./clean-up");
 const updatePlayer = require("./update");
+const findWinner = require("./find-winner");
 
 module.exports = {
   checkPlayers,
@@ -20,4 +21,5 @@ module.exports = {
   updateWinnerPlayer,
   cleanUp,
   updatePlayer,
+  findWinner,
 };

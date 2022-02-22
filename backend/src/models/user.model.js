@@ -9,6 +9,15 @@ const UserModel = {
     return trx.knex("users").select().where({ is_active: true });
   },
 
+  findWinner: (trx = knex) => {
+    return trx
+      .knex("users")
+      .select()
+      .orderBy("points", "desc")
+      .limit(1)
+      .getFirst();
+  },
+
   getAvailable: (trx = knex) => {
     return trx.knex("users").select().where({ is_active: false });
   },
@@ -16,7 +25,13 @@ const UserModel = {
   delete: (trx = knex) => {
     return trx
       .knex("users")
-      .update({ is_active: false, points: null })
+      .update({
+        is_active: false,
+        points: 0,
+        has_answered: false,
+        winner: false,
+        is_leader: false,
+      })
       .where({ is_active: true });
   },
 

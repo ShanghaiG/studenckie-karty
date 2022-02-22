@@ -4,6 +4,7 @@ const findMain = require("./find-main");
 const findAnswers = require("./find-answers");
 const updateWinner = require("./update-winner");
 const findWinners = require("./find-winners");
+const deleteGame = require("./delete");
 
 module.exports = {
   findGame,
@@ -12,4 +13,5 @@ module.exports = {
   findAnswers,
   updateWinner,
   findWinners,
+  deleteGame,
 };

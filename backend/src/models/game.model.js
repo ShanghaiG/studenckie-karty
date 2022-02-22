@@ -52,6 +52,30 @@ const GameModel = {
       .returning("*")
       .getFirst();
   },
+
+  clearMains: (trx = knex) => {
+    return trx
+      .knex("game")
+      .update({ main_card_id: null })
+      .whereNotNull("main_card_id")
+      .returning("*");
+  },
+
+  clearAnswers: (trx = knex) => {
+    return trx
+      .knex("game")
+      .update({ answer_card_id: null })
+      .whereNotNull("answer_card_id")
+      .returning("*");
+  },
+
+  clearWinners: (trx = knex) => {
+    return trx
+      .knex("game")
+      .update({ winner: false })
+      .where({ winner: true })
+      .returning("*");
+  },
 };
 
 module.exports = GameModel;

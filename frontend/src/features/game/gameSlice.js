@@ -54,6 +54,10 @@ export const preloadAvailableUser = () => async (dispatch) => {
   dispatch(addPlayer(user.payload));
 };
 
+export const rebuildGame = () => async (dispatch) => {
+  dispatch(setStage("START"));
+};
+
 export const startGame = (code) => async (dispatch) => {
   await dispatch(fetchAnswersCard());
   await dispatch(fetchMainCard());
@@ -82,14 +86,18 @@ export const roundStart = () => async (dispatch) => {
   dispatch(setStage("ROUND_START"));
 };
 
-export const roundSecond = () => async (dispatch) => {
+export const roundTwo = () => async (dispatch) => {
   dispatch(setRound(2));
   dispatch(setStage("ROUND_START"));
 };
 
-export const roundThird = () => async (dispatch) => {
+export const roundThree = () => async (dispatch) => {
   dispatch(setRound(3));
   dispatch(setStage("ROUND_START"));
+};
+
+export const gameEnd = () => async (dispatch) => {
+  dispatch(setStage("GAME_END"));
 };
 
 export const gameSlice = createSlice({

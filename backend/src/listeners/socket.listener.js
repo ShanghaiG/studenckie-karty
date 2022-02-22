@@ -8,6 +8,8 @@ const {
   cleanUp,
   updatePlayer,
   updatePoints,
+  findWinner,
+  deletePlayer,
 } = require("../services/users");
 const {
   updateGame,
@@ -16,6 +18,7 @@ const {
   findAnswers,
   updateWinner,
   findWinners,
+  deleteGame,
 } = require("../services/game");
 const { findMainCard } = require("../services/cards");
 
@@ -96,6 +99,12 @@ module.exports = (httpServer) => {
       });
     });
 
+    socket.on("getWinner", async () => {
+      const user = await findWinner();
+
+      socket.emit("sendWinner", user);
+    });
+
     socket.on("clearPlayers", async () => {
       await cleanUp();
     });
@@ -111,6 +120,13 @@ module.exports = (httpServer) => {
         await updatePoints(data.id);
         socket.emit("sendUpdatePoints");
       }
+    });
+
+    socket.on("finish", async () => {
+      await deleteGame();
+      await deletePlayer();
+
+      socket.emit("sendFinish");
     });
 
     socket.on("disconnect", () => {

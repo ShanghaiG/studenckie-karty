@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
 import {
-  roundSecond,
-  roundStart,
-  roundThird,
+  roundTwo,
+  roundThree,
+  gameEnd,
 } from "../../../features/game/gameSlice";
 
 const socket = io.connect("http://localhost:8001");
@@ -21,7 +21,7 @@ const useRoundFinal = () => {
   const [updatedUser, setUpdatedUser] = useState(null);
   const [updatedPoints, setUpdatedPoints] = useState(false);
 
-  const constRound = round;
+  const [constRound, setConstRound] = useState(round);
 
   useEffect(() => {
     if (!players.length) {
@@ -105,19 +105,11 @@ const useRoundFinal = () => {
   const startRound = () => {
     switch (constRound) {
       case 1:
-        dispatch(roundSecond());
+        dispatch(roundTwo());
         break;
       case 2:
-        dispatch(roundThird());
+        dispatch(gameEnd());
         break;
-      // case 3:
-      //   dispatch(roundStart(4));
-      //   break;
-      // case 4:
-      //   dispatch(roundStart(5));
-      //   break;
-      // case 5:
-      //   return null;
       default:
         return null;
     }
