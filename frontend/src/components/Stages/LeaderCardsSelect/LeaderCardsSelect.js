@@ -51,7 +51,7 @@ const LeaderCardsSelect = () => {
     </Split>
   ) : (
     <Fullscreen>
-      <h1>Oczekiwanie na lidera</h1>
+      <h1 className={"testClass"}>Oczekiwanie na lidera</h1>
       <Players players={players} />
       {players.some((player) => player.isLeader && player.hasAnswered)
         ? setTimeout(() => {

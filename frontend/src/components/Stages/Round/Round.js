@@ -47,7 +47,9 @@ const Round = () => {
         )
       }
     >
-      {isCardSelected ? <h1>Oczekiwanie na koniec rundy</h1> : null}
+      {isCardSelected ? (
+        <h1 className={"testClass"}>Oczekiwanie na koniec rundy</h1>
+      ) : null}
 
       {mainCard ? (
         <div className={"mainCard"}>

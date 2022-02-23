@@ -5,7 +5,7 @@ import Fullscreen from "../../Layouts/Fullscreen";
 import { Player } from "../../Players/Players";
 
 const GameEnd = () => {
-  const { winner, finish, endGame } = useGameEnd();
+  const { winner, endGame } = useGameEnd();
 
   return (
     <Fullscreen>

@@ -11,7 +11,7 @@ const RoundStart = () => {
 
   return (
     <Fullscreen>
-      <h1>Runda {roundNames[constRound - 1]}</h1>
+      <h1 className={"testClass"}>Runda {roundNames[constRound - 1]}</h1>
       {players ? <Players players={players} /> : null}
       {setTimeout(() => {
         startLeaderChooseCard();

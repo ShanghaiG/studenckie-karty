@@ -48,7 +48,7 @@ const LeaderChooseWinner = () => {
         ) : null
       }
     >
-      <h1>Wybierz zwycięzcę</h1>
+      <h1 className={"testClass"}>Wybierz zwycięzcę</h1>
       {mainCard ? (
         <div className={"mainCard"}>
           <Card data={mainCard} />

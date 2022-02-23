@@ -43,11 +43,11 @@ const Card = (data) => {
       }}
     >
       {/* <div className={"card"} data-size={size}> */}
+
       <header className={"card__header"}>KARTA GŁÓWNA</header>
       <main className={"card__content"}>{cardText}</main>
       <footer className={"card__footer"}>Studenckie Karty</footer>
     </button>
-    // </div>
   );
 };
 

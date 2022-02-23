@@ -8,7 +8,8 @@ const GameStageStart = () => {
 
   return (
     <Fullscreen>
-      <h1>Dołącz do gry</h1>
+      <h1 className={"testClass"}>Dołącz do gry</h1>
+
       <form
         className={"startForm"}
         onSubmit={(e) => {

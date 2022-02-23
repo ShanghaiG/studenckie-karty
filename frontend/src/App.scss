@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap");
 
 body {
   font-family: "Roboto", sans-serif;
@@ -27,6 +28,25 @@ body {
   justify-content: center;
 }
 
+// .card:hover {
+//   transform: scale(1.1, 1.1);
+//   box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25),
+//     -5px -5px 30px 15px rgba(0, 0, 0, 0.22);
+// }
+
+// .card--main-answer:hover {
+//   border: 1px solid #78f68b;
+//   background: #f5c13c;
+//   transform: translateY(-5px) scale(1.005) translateZ(0);
+//   box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11),
+//     0 24px 46px var(--box-shadow-color);
+// }
+
+// .card:not(:hover) {
+//   background: #f2b211;
+//   opacity: 0.9;
+// }
+
 .card {
   height: 30em;
   width: 20.6em;
@@ -42,6 +62,8 @@ body {
   flex-direction: column;
   justify-content: space-between;
   color: #231a02;
+  animation-name: test;
+  animation-duration: 3s;
 
   &[data-size="large"] {
     height: 47.6em;
@@ -62,18 +84,48 @@ body {
     background: #231a02;
     color: #f2b211;
     cursor: pointer;
-    &[data-selected="true"] {
-      background: #9dc73d;
-      color: #1400ff;
+    &:hover {
+      &[data-selected="true"] {
+        background: #9dc73d;
+        color: #1400ff;
+      }
+      border: 0.5px solid #46684c;
+      background: rgba(53, 43, 6, 0.676);
+      transform: translateY(-5px) scale(1.005) translateZ(0);
+      box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11),
+        0 24px 46px var(--box-shadow-color);
+    }
+    &:not(:hover) {
+      &[data-selected="true"] {
+        background: #9dc73d;
+        color: #1400ff;
+      }
+      background: #231a02;
+      opacity: 0.9;
     }
   }
   &--main-answer {
     background: #f2b211;
     color: #231a02;
     cursor: pointer;
-    &[data-selected="true"] {
-      background: #9dc73d;
-      color: #1400ff;
+    &:hover {
+      &[data-selected="true"] {
+        background: #9dc73d;
+        color: #1400ff;
+      }
+      border: 1px solid #78f68b;
+      background: #f5c13c;
+      transform: translateY(-5px) scale(1.005) translateZ(0);
+      box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11),
+        0 24px 46px var(--box-shadow-color);
+    }
+    &:not(:hover) {
+      &[data-selected="true"] {
+        background: #9dc73d;
+        color: #1400ff;
+      }
+      background: #f2b211;
+      opacity: 0.9;
     }
   }
 }
@@ -134,27 +186,30 @@ body {
 }
 
 h1 {
+  font-family: "Oswald", sans-serif;
   font-weight: bold;
   font-size: 10em;
   line-height: 1em;
   color: #f2b211;
-  animation-name: test;
-  animation-duration: 3s;
+  text-transform: uppercase;
+  // animation-name: test;
+  // animation-duration: 3s;
 }
 
 .startForm {
   display: flex;
   justify-content: center;
   input {
-    height: 1.4em;
-    width: 6em;
-    font-size: 9em;
+    height: 1em;
+    width: 4em;
+    font-size: 6em;
   }
 
   button {
-    height: 1.4em;
-    width: 1.4em;
-    font-size: 9em;
+    height: 1.01em;
+    width: 1em;
+    font-size: 6em;
+    background-color: #c7ae3d;
   }
 }
 
@@ -298,4 +353,90 @@ h1 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 180px;
+  }
+  100% {
+    background-position: 180px;
+  }
+}
+
+.testClass {
+  text-transform: uppercase;
+  animation: glitch 1s linear infinite;
+}
+
+@keyframes glitch {
+  2%,
+  64% {
+    transform: translate(2px, 0) skew(0deg);
+  }
+  4%,
+  60% {
+    transform: translate(-2px, 0) skew(0deg);
+  }
+  62% {
+    transform: translate(0, 0) skew(5deg);
+  }
+}
+
+.testClass:before,
+.testClass:after {
+  content: attr("Dołącz do gry");
+  position: absolute;
+  left: 0;
+}
+
+.testClass:before {
+  animation: glitchTop 1s linear infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+}
+
+@keyframes glitchTop {
+  2% {
+    transform: translate(2px, -2px);
+  }
+  64% {
+    transform: translate(2px, -2px);
+  }
+  4% {
+    transform: translate(-2px, 2px);
+  }
+  60% {
+    transform: translate(-2px, 2px);
+  }
+  62% {
+    transform: translate(13px, -1px) skew(-13deg);
+  }
+}
+
+.testClass:after {
+  animation: glitchBotom 1.5s linear infinite;
+  clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+}
+
+@keyframes glitchBotom {
+  2% {
+    transform: translate(-2px, 0);
+  }
+  64% {
+    transform: translate(-2px, 0);
+  }
+  4% {
+    transform: translate(-2px, 0);
+  }
+  60% {
+    transform: translate(-2px, 0);
+  }
+  62% {
+    transform: translate(-22px, 5px) skew(21deg);
+  }
 }

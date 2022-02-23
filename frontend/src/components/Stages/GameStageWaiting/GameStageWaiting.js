@@ -9,7 +9,7 @@ const GameStageWaiting = () => {
 
   return (
     <Fullscreen>
-      <h1>Gra zaraz się rozpocznie</h1>
+      <h1 className={"testClass"}>Gra zaraz się rozpocznie</h1>
       {players ? <Players players={players} /> : null}
       {players?.length === 4 ? startRound() : null}
     </Fullscreen>
