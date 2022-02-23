@@ -11,10 +11,7 @@ export const Player = (props) => {
         data-winner={player.winner}
         data-admin={player.isLeader}
       >
-        <img
-          src={`https://eu.ui-avatars.com/api/?name=${player.firstName}+${player.lastName}`}
-          alt={"avatar"}
-        />
+        <img src={"https://i.ibb.co/yFXBqFR/avatar.png"} alt={"avatar"} />
       </div>
       <div className={"player__details"}>
         <div className={"player__name"}>
