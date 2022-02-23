@@ -25,7 +25,7 @@ const GameStageStart = () => {
             dispatch(setCode(e.target.value));
           }}
         />
-        <button type={"submit"}>&gt;</button>
+        {/* <button type={"submit"}>&gt;</button> */}
       </form>
     </Fullscreen>
   );
