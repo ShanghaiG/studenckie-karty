@@ -8,7 +8,7 @@ const GameStageStart = () => {
 
   return (
     <Fullscreen>
-      <h1 className={"testClass"}>Dołącz do gry</h1>
+      <h1 className={"testClass"}>Studenckie Karty</h1>
 
       <form
         className={"startForm"}
@@ -20,12 +20,21 @@ const GameStageStart = () => {
       >
         <input
           type={"text"}
+          placeholder="Podaj kod gry"
           value={code}
           onChange={(e) => {
             dispatch(setCode(e.target.value));
           }}
         />
-        {/* <button type={"submit"}>&gt;</button> */}
+        {code === "5sbs7" ? (
+          <button type={"submit"}>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Dołącz do gry
+          </button>
+        ) : null}
       </form>
     </Fullscreen>
   );
