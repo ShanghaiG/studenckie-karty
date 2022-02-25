@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useRound from "../Round/Round.hook";
 import { useSelector } from "react-redux";
 import Players from "../../Players";
@@ -7,6 +7,22 @@ import Card from "../../Card/Card";
 import useGameStageWaiting from "../GameStageWaiting/GameStageWaiting.hook";
 import Fullscreen from "../../Layouts/Fullscreen";
 import useLeaderCardsSelect from "./LeaderCardsSelect.hook";
+
+const TimeoutComponent = ({ action, time }) => {
+  useEffect(() => {
+    let timeoutId;
+    timeoutId = setTimeout(() => {
+      action();
+    }, time);
+    return () => {
+      if (typeof timeoutId !== "undefined") {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, []);
+
+  return null;
+};
 
 const LeaderCardsSelect = () => {
   const {
@@ -42,22 +58,18 @@ const LeaderCardsSelect = () => {
       })}
     >
       <h1>Wybierz kartę główną</h1>
-      {mainCardData && player.isLeader
-        ? setTimeout(() => {
-            startChooseWinner();
-          }, 4000)
-        : null}
+      {mainCardData && player.isLeader ? (
+        <TimeoutComponent action={startChooseWinner} time={4000} />
+      ) : null}
       <Players players={players} />
     </Split>
   ) : (
     <Fullscreen>
       <h1 className={"testClass"}>Oczekiwanie na lidera</h1>
       <Players players={players} />
-      {players.some((player) => player.isLeader && player.hasAnswered)
-        ? setTimeout(() => {
-            startRound();
-          }, 4000)
-        : null}
+      {players.some((player) => player.isLeader && player.hasAnswered) ? (
+        <TimeoutComponent action={startRound} time={2000} />
+      ) : null}
     </Fullscreen>
   );
 };

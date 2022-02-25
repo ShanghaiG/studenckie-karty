@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
+import { roundEnd } from "../../../features/game/gameSlice";
 
 const socket = io.connect("http://localhost:8001");
 
 const useRound = () => {
+  const dispatch = useDispatch();
   const currentPlayer = useSelector((state) => state.game.player);
   const round = useSelector((state) => state.game.round);
   const [mainCard, setMainCard] = useState(null);
@@ -86,11 +88,16 @@ const useRound = () => {
     }
   };
 
+  const startRoundEnd = () => {
+    dispatch(roundEnd());
+  };
+
   return {
     mainCard,
     updateCard,
     players,
     updateUser,
+    startRoundEnd,
   };
 };
 

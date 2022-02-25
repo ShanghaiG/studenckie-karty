@@ -96,6 +96,11 @@ export const roundThree = () => async (dispatch) => {
   dispatch(setStage("ROUND_START"));
 };
 
+export const roundFour = () => async (dispatch) => {
+  dispatch(setRound(4));
+  dispatch(setStage("ROUND_START"));
+};
+
 export const gameEnd = () => async (dispatch) => {
   dispatch(setStage("GAME_END"));
 };

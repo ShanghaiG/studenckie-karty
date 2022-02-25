@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useRoundFinal from "./RoundFinal.hook";
 import Players from "../../Players";
 
 import Card from "../../Card/Card";
 import Fullscreen from "../../Layouts/Fullscreen";
+
+const TimeoutComponent = ({ action, time }) => {
+  useEffect(() => {
+    let timeoutId;
+    timeoutId = setTimeout(() => {
+      action();
+    }, time);
+    return () => {
+      if (typeof timeoutId !== "undefined") {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, []);
+
+  return null;
+};
 
 const RoundFinal = () => {
   const { mainCard, winnerCard, clearMatchup, players, startRound, isCleared } =
@@ -27,16 +43,10 @@ const RoundFinal = () => {
           <Card data={winnerCard} size={"large"} />
         </div>
       ) : null}
-      {mainCard && winnerCard
-        ? setTimeout(() => {
-            clearMatchup();
-          }, 5000)
-        : null}
-      {isCleared
-        ? setTimeout(() => {
-            startRound();
-          }, 7000)
-        : null}
+      {mainCard && winnerCard ? (
+        <TimeoutComponent action={clearMatchup} time={8000} />
+      ) : null}
+      {isCleared ? <TimeoutComponent action={startRound} time={9000} /> : null}
     </Fullscreen>
   );
 };

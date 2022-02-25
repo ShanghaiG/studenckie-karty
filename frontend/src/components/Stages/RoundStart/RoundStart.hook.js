@@ -7,6 +7,7 @@ const socket = io.connect("http://localhost:8001");
 
 const useRoundStart = () => {
   const dispatch = useDispatch();
+  const round = useSelector((state) => state.game.round);
   const [players, setPlayers] = useState([]);
 
   const startLeaderChooseCard = () => {
@@ -32,7 +33,7 @@ const useRoundStart = () => {
     };
   }, []);
 
-  return { startLeaderChooseCard, players };
+  return { startLeaderChooseCard, players, round };
 };
 
 export default useRoundStart;

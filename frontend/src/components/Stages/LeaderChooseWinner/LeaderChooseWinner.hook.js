@@ -8,12 +8,15 @@ const socket = io.connect("http://localhost:8001");
 const useLeaderChooseWinner = () => {
   const dispatch = useDispatch();
   const round = useSelector((state) => state.game.round);
-
+  const currentPlayer = useSelector((state) => state.game.player);
   const [mainCard, setMainCard] = useState(null);
   const [cards, setCards] = useState([]);
   const [players, setPlayers] = useState([]);
   const [isWinnerCard, setIsWinnerCard] = useState(false);
   const [cardId, setCardId] = useState(null);
+  const [updatedUser, setUpdatedUser] = useState(null);
+  const [updatedPoints, setUpdatedPoints] = useState(false);
+  const [winnerCard, setWinner] = useState(false);
 
   useEffect(() => {
     if (!players.length) {
@@ -42,10 +45,25 @@ const useLeaderChooseWinner = () => {
       }
     });
 
+    socket.on("winnerCardSet", () => {
+      setWinner(true);
+    });
+
+    socket.on("sendUpdatePoints", () => {
+      setUpdatedPoints(true);
+    });
+
+    socket.on("sendUpdateWinnerPlayer", (data) => {
+      setUpdatedUser(data);
+    });
+
     return () => {
       socket.off("sendPlayers");
       socket.off("sendMainCard2");
       socket.off("sendCards");
+      socket.off("sendUpdatePoints");
+      socket.off("sendUpdateWinnerPlayer");
+      socket.off("winnerCardSet");
     };
   }, []);
 
@@ -54,11 +72,20 @@ const useLeaderChooseWinner = () => {
       socket.emit("getMainCard", { round });
     }
 
+    if (updatedUser && !updatedPoints) {
+      console.log("updatedUser", updatedUser);
+      socket.emit("updatePoints", updatedUser);
+      socket.emit("getPlayers");
+    }
+
     if (!cards.length || cards.includes(null)) {
       socket.emit("getCards", { round });
     }
 
-    if (cardId) {
+    if (cardId && !winnerCard) {
+      console.log("ile razy w cardId");
+      socket.emit("updateWinnerPlayer", { round });
+      socket.emit("getPlayers");
       socket.emit("setWinnerCard", {
         round,
         cardId: cardId.id,
@@ -69,6 +96,9 @@ const useLeaderChooseWinner = () => {
       socket.off("getMainCard");
       socket.off("getCards");
       socket.off("setWinnerCard");
+      socket.off("updatePoints");
+      socket.off("updateWinnerPlayer");
+      socket.off("getPlayers");
     };
   });
 
@@ -81,6 +111,12 @@ const useLeaderChooseWinner = () => {
       setIsWinnerCard(true);
     }
   };
+
+  // const updateWinnerPoints = () => {
+  //   if (!updatedPoints) {
+  //     setUpdatedPoints(true);
+  //   }
+  // };
 
   const startRoundEnd = () => {
     dispatch(roundEnd());

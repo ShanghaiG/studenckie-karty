@@ -80,6 +80,8 @@ module.exports = (httpServer) => {
 
     socket.on("setWinnerCard", async (data) => {
       await updateWinner(data.round, data.cardId);
+
+      socket.emit("winnerCardSet");
     });
 
     socket.on("getWinnerCard", async (data) => {
