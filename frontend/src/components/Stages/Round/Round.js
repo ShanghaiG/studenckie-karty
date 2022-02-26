@@ -21,6 +21,9 @@ const TimeoutComponent = ({ action, time }) => {
   return null;
 };
 
+/*
+ * Main logic of selecting player's cards component
+ */
 const Round = () => {
   const { players, updateCard, mainCard, updateUser, startRoundEnd } =
     useRound();

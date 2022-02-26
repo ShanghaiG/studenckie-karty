@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import useRound from "../Round/Round.hook";
 import { useSelector } from "react-redux";
 import Players from "../../Players";
 import Split from "../../Layouts/Split";
 import Card from "../../Card/Card";
-import useGameStageWaiting from "../GameStageWaiting/GameStageWaiting.hook";
 import Fullscreen from "../../Layouts/Fullscreen";
 import useLeaderCardsSelect from "./LeaderCardsSelect.hook";
 
@@ -24,6 +22,9 @@ const TimeoutComponent = ({ action, time }) => {
   return null;
 };
 
+/*
+ * Leader component, where he choose which main card should be played with
+ */
 const LeaderCardsSelect = () => {
   const {
     players,

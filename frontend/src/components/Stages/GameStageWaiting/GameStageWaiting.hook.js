@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
-import { leaderChooseCard, roundStart } from "../../../features/game/gameSlice";
+import { roundStart } from "../../../features/game/gameSlice";
 
 const socket = io.connect("http://localhost:8001");
 

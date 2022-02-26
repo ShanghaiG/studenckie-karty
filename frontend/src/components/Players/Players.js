@@ -1,6 +1,9 @@
 import React from "react";
 import usePlayers from "./Players.hook";
 
+/*
+ * Main single player component
+ */
 export const Player = (props) => {
   const { player, side, size } = props;
 
@@ -26,6 +29,9 @@ export const Player = (props) => {
   );
 };
 
+/*
+ * Multiple players gathered component
+ */
 const Players = (props) => {
   const { players } = props;
 

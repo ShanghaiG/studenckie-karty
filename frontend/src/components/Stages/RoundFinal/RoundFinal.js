@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import useRoundFinal from "./RoundFinal.hook";
 import Players from "../../Players";
 
@@ -21,6 +21,9 @@ const TimeoutComponent = ({ action, time }) => {
   return null;
 };
 
+/*
+ * Final components of Round, where the winner of round is show
+ */
 const RoundFinal = () => {
   const { mainCard, winnerCard, clearMatchup, players, startRound, isCleared } =
     useRoundFinal();

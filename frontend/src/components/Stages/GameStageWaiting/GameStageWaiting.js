@@ -4,6 +4,9 @@ import Players from "../../Players";
 
 import Fullscreen from "../../Layouts/Fullscreen";
 
+/*
+ * Stage component where players are waiting for all players to connect
+ */
 const GameStageWaiting = () => {
   const { players, startRound } = useGameStageWaiting();
 

@@ -1,6 +1,6 @@
 const { Server } = require("socket.io");
 const UserModel = require("@models/user.model");
-const checkPlayers = require("../services/users/check-players");
+
 const {
   updateActive,
   findUser,
@@ -14,7 +14,6 @@ const {
 const {
   updateGame,
   findMain,
-  findGame,
   findAnswers,
   updateWinner,
   findWinners,

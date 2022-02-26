@@ -1,18 +1,13 @@
 import React from "react";
 
 /**
- * PlayerCards component
+ * Single card component
  */
 const Card = (data) => {
   const type = data.data.type;
-  const id = data.data.id;
   const cardText = data.data.cardText;
 
   let { selected, size, onSelect } = data;
-
-  // console.log("co w onSelect jest", onSelect());
-  // console.log("co w selected jest", selected);
-  // // selected = onSelect() ? true : false;
 
   if (type === "ANSWER") {
     return (
@@ -42,8 +37,6 @@ const Card = (data) => {
         onSelect();
       }}
     >
-      {/* <div className={"card"} data-size={size}> */}
-
       <header className={"card__header"}>KARTA GŁÓWNA</header>
       <main className={"card__content"}>{cardText}</main>
       <footer className={"card__footer"}>Studenckie Karty</footer>

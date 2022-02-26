@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import useGameEnd from "./GameEnd.hook";
-import Players from "../../Players";
 import Fullscreen from "../../Layouts/Fullscreen";
 import { Player } from "../../Players/Players";
 
@@ -20,6 +19,9 @@ const TimeoutComponent = ({ action, time }) => {
   return null;
 };
 
+/*
+ * Game end component, that shows which player has won a game
+ */
 const GameEnd = () => {
   const { winner, endGame } = useGameEnd();
 

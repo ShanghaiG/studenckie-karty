@@ -3,6 +3,9 @@ import useRoundStart from "./RoundStart.hook";
 import Players from "../../Players";
 import Fullscreen from "../../Layouts/Fullscreen";
 
+/*
+ * Component that tells which round currently is played
+ */
 const RoundStart = () => {
   const { startLeaderChooseCard, players, round } = useRoundStart();
   const roundNames = ["Pierwsza", "Druga", "Trzecia", "Czwarta", "Piąta"];

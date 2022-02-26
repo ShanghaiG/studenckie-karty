@@ -21,6 +21,9 @@ const TimeoutComponent = ({ action, time }) => {
   return null;
 };
 
+/*
+ * Leader component, where leader choose witch card should win a round
+ */
 const LeaderChooseWinner = () => {
   const {
     mainCard,
@@ -29,7 +32,6 @@ const LeaderChooseWinner = () => {
     startRoundEnd,
     players,
     isWinnerCard,
-    updateWinnerPoints,
   } = useLeaderChooseWinner();
 
   const [selectedCard, setSelectedCard] = useState(null);

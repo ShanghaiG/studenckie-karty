@@ -10,7 +10,7 @@ module.exports = async () => {
   for (const user of users) {
     if (user.isActive) counter++;
   }
-  console.log("co w counter", counter);
+
   if (counter === 4) {
     return true;
   }

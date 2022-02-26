@@ -8,7 +8,6 @@ const socket = io.connect("http://localhost:8001");
 const useLeaderChooseWinner = () => {
   const dispatch = useDispatch();
   const round = useSelector((state) => state.game.round);
-  const currentPlayer = useSelector((state) => state.game.player);
   const [mainCard, setMainCard] = useState(null);
   const [cards, setCards] = useState([]);
   const [players, setPlayers] = useState([]);
@@ -73,7 +72,6 @@ const useLeaderChooseWinner = () => {
     }
 
     if (updatedUser && !updatedPoints) {
-      console.log("updatedUser", updatedUser);
       socket.emit("updatePoints", updatedUser);
       socket.emit("getPlayers");
     }
@@ -83,7 +81,6 @@ const useLeaderChooseWinner = () => {
     }
 
     if (cardId && !winnerCard) {
-      console.log("ile razy w cardId");
       socket.emit("updateWinnerPlayer", { round });
       socket.emit("getPlayers");
       socket.emit("setWinnerCard", {
@@ -111,12 +108,6 @@ const useLeaderChooseWinner = () => {
       setIsWinnerCard(true);
     }
   };
-
-  // const updateWinnerPoints = () => {
-  //   if (!updatedPoints) {
-  //     setUpdatedPoints(true);
-  //   }
-  // };
 
   const startRoundEnd = () => {
     dispatch(roundEnd());

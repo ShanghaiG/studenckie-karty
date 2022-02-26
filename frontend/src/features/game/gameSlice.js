@@ -81,6 +81,10 @@ export const roundEnd = () => async (dispatch) => {
   dispatch(setStage("ROUND_END"));
 };
 
+/*
+ * Methods here are separated due to problems with rerendering/reloading
+ * hooks and components.
+ */
 export const roundStart = () => async (dispatch) => {
   dispatch(setRound(1));
   dispatch(setStage("ROUND_START"));
@@ -88,16 +92,6 @@ export const roundStart = () => async (dispatch) => {
 
 export const roundTwo = () => async (dispatch) => {
   dispatch(setRound(2));
-  dispatch(setStage("ROUND_START"));
-};
-
-export const roundThree = () => async (dispatch) => {
-  dispatch(setRound(3));
-  dispatch(setStage("ROUND_START"));
-};
-
-export const roundFour = () => async (dispatch) => {
-  dispatch(setRound(4));
   dispatch(setStage("ROUND_START"));
 };
 
