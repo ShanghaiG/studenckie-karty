@@ -11,6 +11,9 @@ module.exports = {
       user: process.env.DBUSER,
       password: process.env.DBPASS,
       database: process.env.DBNAME,
+      ssl: {
+        rejectUnauthorized: false,
+      },
     },
     migrations: {
       tableName: "migrations",

@@ -1,8 +1,5 @@
 /** @format */
 
-const { body, param, validationResult } = require("express-validator");
-const { ValidatorException } = require("@exceptions");
-
 const { findAllMainCards, findAllAnswersCards } = require("@services/cards");
 
 module.exports = {

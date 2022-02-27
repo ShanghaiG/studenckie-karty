@@ -4,7 +4,8 @@
   "description": "projekt-kck",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "_moduleAliases": {
     "@config": "config/",
@@ -13,6 +14,7 @@
     "@enums": "src/enums/",
     "@exceptions": "src/exceptions/",
     "@helpers": "src/helpers/",
+    "@listeners": "src/listeners/",
     "@middleware": "src/middleware/",
     "@models": "src/models/",
     "@routes": "src/routes/",
@@ -32,19 +34,25 @@
     "body-parser": "^1.19.1",
     "camelcase": "^6.3.0",
     "config": "^3.3.7",
+    "cors": "^2.8.5",
     "decamelize": "^6.0.0",
     "dotenv": "^14.3.0",
     "express": "^4.17.2",
     "express-validator": "^6.14.0",
     "expressjs": "^1.0.1",
     "helmet": "^5.0.2",
+    "http": "^0.0.1-security",
     "knex": "^1.0.1",
     "module-alias": "^2.2.2",
     "node": "^17.4.0",
     "node-fetch": "^2.6.1",
+    "nodemon": "^2.0.15",
     "path": "^0.12.7",
     "pg": "^8.7.1",
     "pino": "^7.6.4",
-    "pino-http": "^6.6.0"
+    "pino-http": "^6.6.0",
+    "reflect-metadata": "^0.1.13",
+    "socket-controllers": "^0.0.5",
+    "socket.io": "^4.4.1"
   }
 }
